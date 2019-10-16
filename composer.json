@@ -37,7 +37,11 @@
         "classmap": [
             "database/seeds",
             "database/factories"
-        ]
+        ],
+        "files": [
+            "app/Shared/BaseResponseApi.php"
+        ]  
+        
     },
     "autoload-dev": {
         "psr-4": {
