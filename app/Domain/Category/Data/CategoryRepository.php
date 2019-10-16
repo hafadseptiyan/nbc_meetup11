@@ -6,9 +6,22 @@ use App\Domain\Category\Entities\Category;
 
 class CategoryRepository
 {
-    public function findByCategoryId($categoryId)
+    protected $model;
+
+	public function __construct(Category $model)
+	{
+		$this->model = $model;
+    }
+
+    public function store(Category $model)
+	{
+		$model->save();
+		return $model;
+    }
+    
+    public function findByCategoryId($id)
     {
-        return Category::findOrFail($categoryId);
+        return Category::findOrFail($id);
     }
 
     public function deleteByCategoryId($id)

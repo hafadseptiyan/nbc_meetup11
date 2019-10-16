@@ -1,20 +1,20 @@
 <?php
-namespace App\Http\Controllers\API\V1\Category;
+namespace App\Http\Controllers\API\V1\Publisher;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Domain\Category\Application\CategoryManagement;
-use App\Domain\Category\Data\CategoryRepository;
-use App\Domain\Category\Services\CategoryDatatable;
-use App\Domain\Category\Validators\CategoryValidator;
-use App\Domain\Category\Entities\Category;
+use App\Domain\Publisher\Application\PublisherManagement;
+use App\Domain\Publisher\Data\PublisherRepository;
+use App\Domain\Publisher\Services\PublisherDatatable;
+use App\Domain\Publisher\Validators\PublisherValidator;
+use App\Domain\Publisher\Entities\Publisher;
 
-class CategoryController extends Controller
+class PublisherController extends Controller
 {
     protected $dataManagement;
     protected $repository;
 
-    public function __construct(CategoryManagement $dataManagement, CategoryRepository $repository)
+    public function __construct(PublisherManagement $dataManagement, PublisherRepository $repository)
     {
         $this->dataManagement = $dataManagement;
         $this->repository = $repository;
@@ -22,11 +22,11 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category = Category::all();
-        return rest_api($category);
+        $publisher = Publisher::all();
+        return rest_api($publisher);
     }
 
-    public function store(Request $request, CategoryValidator $validator)
+    public function store(Request $request, PublisherValidator $validator)
     {
         $data = $request->all();
         $validation = $validator->validate($data);
@@ -43,11 +43,11 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = $this->repository->findByCategoryId($id);
-        return rest_api($category);
+        $publisher = $this->repository->findByPublisherId($id);
+        return rest_api($publisher);
     }
 
-    public function update($id, Request $request, CategoryValidator $validator)
+    public function update($id, Request $request, PublisherValidator $validator)
     {
         $data = $request->all();
         $validation = $validator->validate($data);
@@ -64,7 +64,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $this->repository->deleteByCategoryId($id);
+        $this->repository->deleteByPublisherId($id);
         return rest_api('Data is successfully deleted');
     }
 }

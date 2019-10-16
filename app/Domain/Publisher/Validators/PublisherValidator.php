@@ -1,10 +1,10 @@
 <?php
-namespace App\Domain\Category\Validators;
+namespace App\Domain\Publisher\Validators;
 
 use App\Shared\BaseValidator;
 use Illuminate\Validation\Rule;
 
-class CategoryValidator extends BaseValidator
+class PublisherValidator extends BaseValidator
 {
     /**
      * RegistrationValidator constructor.
@@ -12,18 +12,18 @@ class CategoryValidator extends BaseValidator
     public function __construct()
     {
         $this->rules = [
-            'name'          => ['required', 'unique:categories'],
-            'description'   => 'required',
+            'name'          => ['required', 'unique:publishers'],
+            'address'       => 'required',
         ];
 
         $this->attributes = [
-            'name'          => 'category',
-            'description'   => 'description',
+            'name'          => 'name of publsher',
+            'address'       => 'address',
         ];
 
         $this->messages = [
             'name.required'         => trans('validation.required'),
-            'description.required'  => trans('validation.required'),
+            'address.required'      => trans('validation.required'),
         ];
     }
 }
