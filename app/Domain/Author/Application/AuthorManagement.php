@@ -6,8 +6,6 @@ use App\Shared\ErrorHandler;
 use App\Domain\Author\Entities\Author;
 use App\Domain\Author\Data\AuthorRepository;
 use App\Domain\Author\Services\UploadAuthorImage;
-use App\Shared\TransactionManager;
-
 
 class AuthorManagement
 {

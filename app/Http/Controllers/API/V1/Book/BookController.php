@@ -1,19 +1,19 @@
 <?php
-namespace App\Http\Controllers\API\V1\Category;
+namespace App\Http\Controllers\API\V1\Book;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Domain\Category\Application\CategoryManagement;
-use App\Domain\Category\Data\CategoryRepository;
-use App\Domain\Category\Validators\CategoryValidator;
-use App\Domain\Category\Entities\Category;
+use App\Domain\Book\Application\BookManagement;
+use App\Domain\Book\Data\BookRepository;
+use App\Domain\Book\Validators\BookValidator;
+use App\Domain\Book\Entities\Book;
 
-class CategoryController extends Controller
+class BookController extends Controller
 {
     protected $dataManagement;
     protected $repository;
 
-    public function __construct(CategoryManagement $dataManagement, CategoryRepository $repository)
+    public function __construct(BookManagement $dataManagement, BookRepository $repository)
     {
         $this->dataManagement = $dataManagement;
         $this->repository = $repository;
@@ -21,11 +21,11 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category = Category::all();
-        return rest_api($category);
+        $book = Book::with('category','author','publisher')->paginate(10);
+        return rest_api($book);
     }
 
-    public function store(Request $request, CategoryValidator $validator)
+    public function store(Request $request, BookValidator $validator)
     {
         $data = $request->all();
         $validation = $validator->validate($data);
@@ -33,7 +33,7 @@ class CategoryController extends Controller
             $response = $this->dataManagement->call($data);
             if($response['status'])
             {
-                return rest_api($response['message'] );
+                return rest_api($response['message']);
             }
             return $this->apiInternalServerErrorResponse([$response['errors']]);
         }
@@ -42,11 +42,11 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        $category = $this->repository->findByCategoryId($id);
-        return rest_api($category);
+        $book = $this->repository->findByBookId($id);
+        return rest_api($book);
     }
 
-    public function update($id, Request $request, CategoryValidator $validator)
+    public function update($id, Request $request, BookValidator $validator)
     {
         $data = $request->all();
         $validation = $validator->validate($data);
@@ -63,7 +63,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $this->repository->deleteByCategoryId($id);
+        $this->repository->deleteByBookId($id);
         return rest_api('Data is successfully deleted');
     }
 }

@@ -5,7 +5,6 @@ namespace App\Domain\Category\Application;
 use App\Shared\ErrorHandler;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Data\CategoryRepository;
-use App\Shared\TransactionManager;
 
 class CategoryManagement
 {

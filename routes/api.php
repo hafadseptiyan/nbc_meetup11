@@ -15,9 +15,14 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
     
+    /**
+     * Rest api route for categories
+     */
     Route::group(['namespace' => 'Category'], function () {
 
         Route::get('categories', 'CategoryController@index')
+                ->name('api.v1.categories.index'); 
+        Route::get('categories/{id}', 'CategoryController@show')
                 ->name('api.v1.categories.index');
         Route::post('categories', 'CategoryController@store')
                 ->name('api.v1.categories.store');
@@ -27,9 +32,14 @@ Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
                 ->name('api.v1.categories.destroy');
     });
 
+    /**
+     * Rest api route for authors
+     */
     Route::group(['namespace' => 'Author'], function () {
    
         Route::get('authors', 'AuthorController@index')
+                ->name('api.v1.authors.index');  
+        Route::get('authors/{id}', 'AuthorController@show')
                 ->name('api.v1.authors.index');
         Route::post('authors', 'AuthorController@store')
                 ->name('api.v1.authors.store');
@@ -39,9 +49,14 @@ Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
                 ->name('api.v1.authors.destroy');
     });
 
+    /**
+     * Rest api route for publishers
+     */
     Route::group(['namespace' => 'Publisher'], function () {
    
         Route::get('publishers', 'PublisherController@index')
+                ->name('api.v1.publishers.index');
+        Route::get('publishers/{id}', 'PublisherController@show')
                 ->name('api.v1.publishers.index');
         Route::post('publishers', 'PublisherController@store')
                 ->name('api.v1.publishers.store');
@@ -50,5 +65,24 @@ Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
         Route::delete('publishers/{id}', 'PublisherController@destroy')
                 ->name('api.v1.publishers.destroy');
     });
+
+    /**
+     * Rest api route for books
+     */
+    Route::group(['namespace' => 'Book'], function () {
+   
+        Route::get('books', 'BookController@index')
+                ->name('api.v1.books.index');
+        Route::get('books/{id}', 'BookController@show')
+                ->name('api.v1.books.index');
+        Route::post('books', 'BookController@store')
+                ->name('api.v1.books.store');
+        Route::post('books/{id}', 'BookController@update')
+                ->name('api.v1.books.update');
+        Route::delete('books/{id}', 'BookController@destroy')
+                ->name('api.v1.books.destroy');
+    });
+
+
 
 });
