@@ -2,9 +2,9 @@
 
 namespace App\Domain\Author\Application;
 
-use App\Shared\ErrorHandler;
+use App\Infrastructure\ErrorHandler;
 use App\Domain\Author\Entities\Author;
-use App\Domain\Author\Data\AuthorRepository;
+use App\Domain\Author\Repository\AuthorRepository;
 use App\Domain\Author\Services\UploadAuthorImage;
 
 class AuthorManagement

@@ -40,7 +40,7 @@
             "database/factories"
         ],
         "files": [
-            "app/Shared/BaseResponseApi.php"
+            "app/Infrastructure/BaseResponseApi.php"
         ]  
         
     },

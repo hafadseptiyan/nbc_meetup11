@@ -2,10 +2,10 @@
 
 namespace App\Domain\Publisher\Application;
 
-use App\Shared\ErrorHandler;
+use App\Infrastructure\ErrorHandler;
 use App\Domain\Publisher\Entities\Publisher;
-use App\Domain\Publisher\Data\PublisherRepository;
-use App\Shared\TransactionManager;
+use App\Domain\Publisher\Repository\PublisherRepository;
+use App\Infrastructure\TransactionManager;
 
 class PublisherManagement
 {

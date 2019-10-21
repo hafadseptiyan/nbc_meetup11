@@ -1,5 +1,5 @@
 <?php
-namespace App\Shared;
+namespace App\Infrastructure;
 
 use Illuminate\Support\Facades\Validator;
 

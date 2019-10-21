@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1\Book;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domain\Book\Application\BookManagement;
-use App\Domain\Book\Data\BookRepository;
+use App\Domain\Book\Repository\BookRepository;
 use App\Domain\Book\Validators\BookValidator;
 use App\Domain\Book\Entities\Book;
 

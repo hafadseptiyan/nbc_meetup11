@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1\Author;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domain\Author\Application\AuthorManagement;
-use App\Domain\Author\Data\AuthorRepository;
+use App\Domain\Author\Repository\AuthorRepository;
 use App\Domain\Author\Services\AuthorDatatable;
 use App\Domain\Author\Validators\AuthorValidator;
 use App\Domain\Author\Entities\Author;
@@ -22,7 +22,7 @@ class AuthorController extends Controller
 
     public function index()
     {
-        $author = Author::all();
+        $author = Author::with('book')->get();
         return rest_api($author);
     }
 

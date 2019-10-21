@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Book\Data;
+namespace App\Domain\Book\Repository;
 
 use App\Domain\Book\Entities\Book;
 

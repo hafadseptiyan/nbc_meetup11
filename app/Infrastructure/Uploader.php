@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared;
+namespace App\Infrastructure;
 
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 

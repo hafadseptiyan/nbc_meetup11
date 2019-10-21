@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Publisher\Data;
+namespace App\Domain\Publisher\Repository;
 
 use App\Domain\Publisher\Entities\Publisher;
 
@@ -21,7 +21,7 @@ class PublisherRepository
     
     public function findByPublisherId($id)
     {
-        return Publisher::findOrFail($id);
+        return Publisher::with('book')->findOrFail($id);
     }
 
     public function deleteByPublisherId($id)

@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Author\Services;
 
-use App\Shared\Uploader;
+use App\Infrastructure\Uploader;
 
 class UploadAuthorImage extends Uploader
 {

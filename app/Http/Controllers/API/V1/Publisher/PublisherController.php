@@ -4,8 +4,7 @@ namespace App\Http\Controllers\API\V1\Publisher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domain\Publisher\Application\PublisherManagement;
-use App\Domain\Publisher\Data\PublisherRepository;
-use App\Domain\Publisher\Services\PublisherDatatable;
+use App\Domain\Publisher\Repository\PublisherRepository;
 use App\Domain\Publisher\Validators\PublisherValidator;
 use App\Domain\Publisher\Entities\Publisher;
 
@@ -22,7 +21,7 @@ class PublisherController extends Controller
 
     public function index()
     {
-        $publisher = Publisher::all();
+        $publisher = Publisher::with('book')->get();
         return rest_api($publisher);
     }
 

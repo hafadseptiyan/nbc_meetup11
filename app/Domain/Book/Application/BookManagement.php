@@ -2,9 +2,9 @@
 
 namespace App\Domain\Book\Application;
 
-use App\Shared\ErrorHandler;
+use App\Infrastructure\ErrorHandler;
 use App\Domain\Book\Entities\Book;
-use App\Domain\Book\Data\BookRepository;
+use App\Domain\Book\Repository\BookRepository;
 use App\Domain\Book\Services\UploadBookImage;
 
 class BookManagement

@@ -2,9 +2,9 @@
 
 namespace App\Domain\Category\Application;
 
-use App\Shared\ErrorHandler;
+use App\Infrastructure\ErrorHandler;
 use App\Domain\Category\Entities\Category;
-use App\Domain\Category\Data\CategoryRepository;
+use App\Domain\Category\Repository\CategoryRepository;
 
 class CategoryManagement
 {

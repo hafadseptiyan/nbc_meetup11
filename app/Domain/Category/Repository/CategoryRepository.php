@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Category\Data;
+namespace App\Domain\Category\Repository;
 
 use App\Domain\Category\Entities\Category;
 

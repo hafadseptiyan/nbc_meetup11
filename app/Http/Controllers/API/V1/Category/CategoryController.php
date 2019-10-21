@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API\V1\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Domain\Category\Application\CategoryManagement;
-use App\Domain\Category\Data\CategoryRepository;
+use App\Domain\Category\Repository\CategoryRepository;
 use App\Domain\Category\Validators\CategoryValidator;
 use App\Domain\Category\Entities\Category;
 

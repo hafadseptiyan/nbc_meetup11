@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Author\Data;
+namespace App\Domain\Author\Repository;
 
 use App\Domain\Author\Entities\Author;
 
@@ -21,7 +21,7 @@ class AuthorRepository
     
     public function findByAuthorId($id)
     {
-        return Author::findOrFail($id);
+        return Author::with('book')->findOrFail($id);
     }
 
     public function deleteByAuthorId($id)

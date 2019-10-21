@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Author\Validators;
 
-use App\Shared\BaseValidator;
+use App\Infrastructure\BaseValidator;
 use Illuminate\Validation\Rule;
 
 class AuthorValidator extends BaseValidator

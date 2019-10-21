@@ -1,7 +1,7 @@
 <?php
 namespace App\Domain\Book\Services;
 
-use App\Shared\Uploader;
+use App\Infrastructure\Uploader;
 
 class UploadBookImage extends Uploader
 {
