@@ -14,7 +14,13 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
-    
+   
+    /**
+     * Rest api with authentication middleware
+     * @return [string] message
+    */
+    Route::group(['middleware' => 'auth:api'], function(){
+   
     /**
      * Rest api route for categories
      */
@@ -81,8 +87,20 @@ Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
                 ->name('api.v1.books.update');
         Route::delete('books/{id}', 'BookController@destroy')
                 ->name('api.v1.books.destroy');
+        });
     });
 
 
+    /**
+     * Rest api route for books
+     */
+    Route::group(['namespace' => 'User'], function () {
+         Route::post('login', 'AuthController@login');
+         Route::post('register', 'AuthController@register');
+         Route::group(['middleware' => 'auth:api'], function(){
+             Route::get('users', 'AuthController@index');
+             Route::get('logout', 'AuthController@logout');
+        });
 
+    });
 });
