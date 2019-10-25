@@ -4,66 +4,56 @@ namespace App\Http\Controllers\Api\V1\User;
 
 use Illuminate\Http\Request; 
 use App\Http\Controllers\Controller; 
-use App\User; 
+use App\Domain\Auth\Application\AuthManagement;
+use App\Domain\Auth\Validators\RegisterValidator;
+use App\Domain\Auth\Validators\LoginValidator;
 use Illuminate\Support\Facades\Auth; 
-use Validator;
 use App\Infrastructure\ErrorHandler;
+use Validator;
 
 class AuthController extends Controller 
 {
-
+	protected $dataManagement;
+	
+	public function __construct(AuthManagement $dataManagement)
+    {
+        $this->dataManagement = $dataManagement;
+	}
+	
 	public function index() {
 		$user = Auth::user();
 		return rest_api(['success' => $user]); 
 	}
 
-	 public function register(Request $request)
+	 public function register(Request $request, RegisterValidator $validator)
 	 {
-		 try {    
-			 $validator = Validator::make($request->all(), 
-			              [ 
-			              'name' => 'required',
-			              'email' => 'required|email|unique:users',
-			              'password' => 'required',  
-			              'c_password' => 'required|same:password', 
-			             ]);   
-			 if ($validator->fails()) {          
-			       return rest_error(['errors'=>$validator->errors()]);    
-			                           }    
-			 $input = $request->all();  
-			 $input['password'] = bcrypt($input['password']);
-			 $user = User::create($input); 
-			 $success['token'] =  $user->createToken('AppName')->accessToken;
-			 return rest_api(['success'=>$success]); 
-
-		} catch (\Exception $e) {
-	      return ['status' => false, 'errors' => [ErrorHandler::display($e->getMessage())]];
-		}		 
+		$data = $request->all();
+		$validation = $validator->validate($data);
+        if ($validation === true) {
+            $response = $this->dataManagement->register($data);
+            if($response['status'])
+            {
+                return rest_api($response['message'] );
+            }
+            return $this->apiInternalServerErrorResponse([$response['errors']]);
+        }
+		return $this->apiUnprocessableEntityResponse($validation->all());	 
 }
   
    
-	public function login(Request $request)
+	public function login(Request $request, LoginValidator $validator)
 	{ 
-		try {    
-			$validator = Validator::make($request->all(), 
-			              [ 
-			              'email' => 'required|email',
-			              'password' => 'required',  
-			             ]);   
-			 if ($validator->fails()) {          
-			       return rest_error(['errors'=>$validator->errors()]);    
-			 }
-			if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){ 
-			   $user = Auth::user(); 
-			   $success['token'] =  $user->createToken('AppName')-> accessToken; 
-			    return rest_api(['success' => $success]); 
-			  } else{ 
-			   return rest_api(['errors'=>'Unauthorized'], 401); 
-			}
-		
-		} catch (\Exception $e) {
-	      return ['status' => false, 'errors' => [ErrorHandler::display($e->getMessage())]];
-		}
+		$data = $request->all();
+		$validation = $validator->validate($data);
+        if ($validation === true) {
+            $response = $this->dataManagement->login($data);
+            if($response['status'])
+            {
+                return rest_api($response['message'] );
+            }
+            return $this->apiInternalServerErrorResponse([$response['errors']]);
+        }
+		return $this->apiUnprocessableEntityResponse($validation->all());
 	}
 
 	 /**
