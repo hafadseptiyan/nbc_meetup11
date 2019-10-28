@@ -35,6 +35,23 @@ Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
     Route::group(['middleware' => 'auth:api'], function(){
    
     /**
+     * Rest api route for books
+     */
+    Route::group(['namespace' => 'Book'], function () {
+   
+        Route::get('books', 'BookController@index')
+                ->name('api.v1.books.index');
+        Route::get('books/{id}', 'BookController@show')
+                ->name('api.v1.books.index');
+        Route::post('books', 'BookController@store')
+                ->name('api.v1.books.store');
+        Route::post('books/{id}', 'BookController@update')
+                ->name('api.v1.books.update');
+        Route::delete('books/{id}', 'BookController@destroy')
+                ->name('api.v1.books.destroy');
+        });
+
+    /**
      * Rest api route for categories
      */
     Route::group(['namespace' => 'Category'], function () {
@@ -85,22 +102,6 @@ Route::group(['prefix' => 'v1','namespace' => 'API\V1'], function () {
                 ->name('api.v1.publishers.destroy');
     });
 
-    /**
-     * Rest api route for books
-     */
-    Route::group(['namespace' => 'Book'], function () {
-   
-        Route::get('books', 'BookController@index')
-                ->name('api.v1.books.index');
-        Route::get('books/{id}', 'BookController@show')
-                ->name('api.v1.books.index');
-        Route::post('books', 'BookController@store')
-                ->name('api.v1.books.store');
-        Route::post('books/{id}', 'BookController@update')
-                ->name('api.v1.books.update');
-        Route::delete('books/{id}', 'BookController@destroy')
-                ->name('api.v1.books.destroy');
-        });
     });
 
 });
